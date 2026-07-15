@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <script>
+    const temaGuardado = localStorage.getItem("tema");
+    if (temaGuardado === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @import "tailwindcss";
+    @custom-variant dark (&:where(.dark, .dark *));
+
+    .fondo-pagina {
+      @apply min-h-screen bg-cover bg-center bg-fixed bg-no-repeat text-slate-800;
+      background-image: url("img/modo-dia.jpg");
+    }
+
+    .dark .fondo-pagina {
+      @apply text-slate-100;
+      background-image: url("img/modo-noche.jpg");
+    }
+
+    .btn-nav-cat {
+      @apply shrink-0 rounded-full border border-[#1a73e8] bg-white px-3 py-1.5 text-sm text-[#1a73e8] hover:bg-[#e8f0fe] dark:border-[#8ab4f8] dark:bg-slate-800 dark:text-[#8ab4f8] dark:hover:bg-[#1e3a5f];
+    }
+
+    .btn-nav-cat.activo {
+      @apply bg-[#e8f0fe] text-[#1a73e8] dark:bg-[#1e3a5f] dark:text-[#8ab4f8];
+    }
+
+    .btn-pagina {
+      @apply min-w-7 rounded-md border border-[#dadce0] bg-white px-1.5 py-0.5 text-xs text-[#3c4043] dark:border-[#5f6368] dark:bg-[#303134] dark:text-[#e8eaed];
+    }
+
+    .btn-pagina.activo {
+      @apply border-[#1a73e8] bg-[#e8f0fe] text-[#1a73e8] dark:bg-[#1e3a5f] dark:text-[#8ab4f8];
+    }
+
+    .btn-vista {
+      @apply border-0 bg-transparent px-3 py-2 text-[#5f6368] dark:text-[#bdc1c6];
+    }
+
+    .btn-vista + .btn-vista {
+      @apply border-l border-[#dadce0] dark:border-[#5f6368];
+    }
+
+    .btn-vista.activo {
+      @apply bg-[#e8f0fe] text-[#1a73e8] dark:bg-[#1e3a5f] dark:text-[#8ab4f8];
+    }
+
+    .btn-tema {
+      @apply rounded-full border border-[#dadce0] bg-white p-2 leading-none hover:bg-[#f1f3f4] dark:border-[#5f6368] dark:bg-[#303134] dark:hover:bg-[#3c4043];
+    }
+
+    .grupo-vista {
+      @apply inline-flex overflow-hidden rounded-full border border-[#dadce0] bg-white dark:border-[#5f6368] dark:bg-[#303134];
+    }
+
+    .btn-cerrar {
+      @apply rounded-full border border-[#1a73e8] bg-transparent px-4 py-2 text-sm text-[#1a73e8] hover:bg-[#e8f0fe] dark:border-[#8ab4f8] dark:text-[#8ab4f8] dark:hover:bg-[#1e3a5f];
+    }
+  </style>
+
+  <link rel="icon" href="img/logo.jpg" type="image/jpeg">
+  <title>Historias que importan</title>
+</head>
+
+<body class="fondo-pagina">
+
+  <div class="min-h-screen">
+
+    <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-white/85 px-4 py-4 shadow-md backdrop-blur-sm dark:border-slate-600/80 dark:bg-slate-900/85">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3 sm:gap-4">
+          <img
+            src="img/logo.jpg"
+            alt="Logo Historias que importan"
+            width="80"
+            height="80"
+            class="size-16 shrink-0 rounded-lg object-cover sm:size-20"
+          >
+          <div class="min-w-0">
+            <h1 class="text-xl font-bold text-rose-900 dark:text-rose-200 sm:text-2xl">
+              Historias que importan
+            </h1>
+            <p class="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm dark:text-slate-400">
+              Biblioteca de biografías, historia y memorias. Descubre libros inspirados en vidas y hechos reales con Open Library.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button type="button" id="btn-tema" class="btn-tema" aria-label="Cambiar tema" title="Cambiar tema">
+            <svg id="icono-sol" class="size-5 fill-current text-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.36Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41l-.71.71a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
+            </svg>
+            <svg id="icono-luna" class="hidden size-5 fill-current text-indigo-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+            </svg>
+          </button>
+
+          <div class="grupo-vista" role="group" aria-label="Tipo de vista">
+            <button type="button" id="btn-lista" class="btn-vista activo" title="Vista lista" aria-pressed="true">
+              <svg class="size-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+              </svg>
+            </button>
+            <button type="button" id="btn-galeria" class="btn-vista" title="Vista galería" aria-pressed="false">
+              <svg class="size-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex w-full flex-wrap items-center gap-3 border-t border-slate-200 pt-3 dark:border-slate-700">
+        <nav id="nav-categorias" aria-label="Categorías de libros">
+          <ul class="flex list-none flex-wrap gap-2 p-0">
+            <li><button type="button" class="categoria-btn btn-nav-cat" data-categoria="biografias">Biografías</button></li>
+            <li><button type="button" class="categoria-btn btn-nav-cat" data-categoria="historia">Historia</button></li>
+            <li><button type="button" class="categoria-btn btn-nav-cat" data-categoria="memorias">Memorias</button></li>
+          </ul>
+        </nav>
+
+        <nav id="nav-paginas" class="ml-auto hidden flex flex-wrap items-center gap-1" aria-label="Paginación">
+          <span class="text-xs font-medium">Pag:</span>
+          <button type="button" id="btn-pag-anterior" class="btn-pagina">&lt;&lt;</button>
+          <ul id="lista-paginas" class="flex flex-wrap gap-1"></ul>
+          <button type="button" id="btn-pag-siguiente" class="btn-pagina">&gt;&gt;</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="p-4 sm:p-6">
+      <p id="estado" class="mb-4 italic text-slate-600 dark:text-slate-400">Elige una categoría.</p>
+      <section id="contenedor-libros" class="overflow-hidden rounded-xl border border-slate-200 bg-white/95 dark:border-slate-600 dark:bg-slate-800/95"></section>
+    </main>
+
+  </div>
+
+  <dialog id="dialog-libro" class="w-[min(100%,36rem)] max-w-lg rounded-xl border border-slate-300 bg-white p-0 dark:border-slate-600 dark:bg-slate-800">
+    <div id="dialog-contenido" class="p-4"></div>
+    <form method="dialog" class="border-t border-slate-200 px-4 py-3 dark:border-slate-700">
+      <button type="submit" class="btn-cerrar">Cerrar</button>
+    </form>
+  </dialog>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>
